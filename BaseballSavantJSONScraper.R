@@ -24,8 +24,6 @@ for (i in seq_along(FSLDatesInput)) {
   ## FSLPayload will contain the game_pk that we can iterate through and assign to gameId, creating a Statcast database of data 
   ## every pitch and batted ball in the FSL.
   
-  ##LOOPING GAME SCRAPER (BETA VERSION OF SCRIPT)
-  
   ##Looping through our gameIds to pull JSON files of each game and gameInfo variable for file exporting
   for (i in seq_along(FSLpayload$game_pk)) {
     gameId <- FSLpayload$game_pk[i]
