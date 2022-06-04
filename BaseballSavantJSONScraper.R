@@ -45,7 +45,7 @@ for (i in seq_along(FSLDatesInput)) {
     #Converting to dataframe and exporting as csv
     gamefeed_data <- as.data.frame(FSL_full_game)
     #Alter your path variable to your directory of choice
-    path <- 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\FSLGames'
+    path <- 'insertyourFSLScrapedGamesfilepathhere'
     write_csv(gamefeed_data, file.path(path, gameFile))
     print(paste(gameId, "finished"))
   }
@@ -91,7 +91,7 @@ for (i in seq_along(PCLpayload$game_pk)) {
     
     #Converting to dataframe and exporting as csv
     gamefeed_data <- as.data.frame(PCL_full_game)
-    path <- 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\PCLGames'
+    path <- 'insertyourPCLScrapedGamesfilepathhere'
     write_csv(gamefeed_data, file.path(path, gameFile))
     print(paste(gameId, "finished"))
     
@@ -102,7 +102,7 @@ print("PCL Game Loop Exited")
 #----------------------------------------------------------------------------------------------------------------------
 #Listing all of our scraped gamefiles from the path we sent them to in the FSL scraper above.
 #We then map them to FSL_df, creating our pitch by pitch data frame.
-FSL_df <- list.files(path = 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\FSLGames',
+FSL_df <- list.files(path = 'referencetheFSLscrapedgamesfilepathfromline48here',
                      pattern="*.csv", 
                      full.names = T) %>% 
   map_df(~read_csv(.))
@@ -111,11 +111,11 @@ FSL_df <- list.files(path = 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\FS
 gameFile <- paste("FSLAllPitches.csv", sep = '')
 
 #Alter your path variable to your directory of choice
-path <- 'C:\\Users\\Will\\Documents\\R\\Datasets\\JSONDatasets\\FSL'
+path <- 'insertFSLDatasetfilepathhere'
 write_csv(FSL_df, file.path(path, gameFile))
 #----------------------------------------------------------------------------------------------------------------------
 #We'll do the same below for PCL_df
-PCL_df <- list.files(path = 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\PCLGames',
+PCL_df <- list.files(path = 'referencethePCLscrapedgamesfilepathfromline94here',
                      pattern="*.csv", 
                      full.names = T) %>% 
   map_df(~read_csv(.))
@@ -123,7 +123,7 @@ PCL_df <- list.files(path = 'C:\\Users\\Will\\Documents\\R\\JSONScrapedGames\\PC
 gameFile <- paste("PCLAllPitches.csv", sep = '')
 
 #Alter your path variable to your directory of choice
-path <- 'C:\\Users\\Will\\Documents\\R\\Datasets\\JSONDatasets\\PCL'
+path <- 'insertPCLDatasetfilepathhere'
 write_csv(PCL_df, file.path(path, gameFile))
 #----------------------------------------------------------------------------------------------------------------------
 #IMPORTANT: Remember to alter the dates and file paths to accomodate the games you wish to scrape.
