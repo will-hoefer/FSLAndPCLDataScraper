@@ -8,6 +8,8 @@ Yesterday <- Sys.Date()-1
 #-----------------------------------------------------------------------------------------------------------
 #Here is where we set the dates that we want games scraped from. 
 #By default, I use the Yesterday variable declared above, since I am up to date and just want to scrape the previous day's games.
+#NOTE: I would advise checking the daily scoreboard for each date you wish to scrape, since a lack of games to scrape throws an error that stops the loop. 
+#Mondays are typically the off day for both the FSL and PCL (with a few exceptions). Scraping day to day is the most advisable way to use this script at present.
 FSLDatesInput <-seq(as.Date(Yesterday), as.Date(Yesterday), by="days")
 FSL <- c("Palm Beach Cardinals","Fort Myers Mighty Mussels", "Jupiter Hammerheads", "Bradenton Marauders", 
          "Lakeland Flying Tigers", "Dunedin Blue Jays", "St. Lucie Mets", "Tampa Tarpons",
@@ -34,7 +36,7 @@ for (i in seq_along(FSLDatesInput)) {
     gameFile <- paste("Pitches" ,gameInfo,".csv", sep = '')
     
     
-    ##PITCH DATA SCRAPE
+    ##PITCH DATA SCRAPE USING JSONLITE
     json_file <- paste("https://baseballsavant.mlb.com/gf?game_pk=",gameId, sep = '')
     data <- fromJSON(json_file)
     teamHome <- data[["team_home"]]
@@ -53,7 +55,7 @@ for (i in seq_along(FSLDatesInput)) {
 }
 print("FSL Game Loop Exited")
 #-------------------------------------------------------------------------------------------------------------------
-#Again, remember to set the dates for the PCL games you wish to scrape.
+#Again, remember to set the dates for the PCL games you wish to scrape--and that going day to day is recommended at this stage.
 
 PCLDatesInput <-seq(as.Date(Yesterday), as.Date(Yesterday), by="days")
 PCL <- c("Albuquerque Isotopes","El Paso Chihuahuas", "Oklahoma City Dodgers", "Round Rock Express", 
@@ -102,7 +104,7 @@ print("PCL Game Loop Exited")
 #----------------------------------------------------------------------------------------------------------------------
 #Listing all of our scraped gamefiles from the path we sent them to in the FSL scraper above.
 #We then map them to FSL_df, creating our pitch by pitch data frame.
-FSL_df <- list.files(path = 'referencetheFSLscrapedgamesfilepathfromline48here',
+FSL_df <- list.files(path = 'referencetheFSLscrapedgamesfilepathhere',
                      pattern="*.csv", 
                      full.names = T) %>% 
   map_df(~read_csv(.))
@@ -115,7 +117,7 @@ path <- 'insertFSLDatasetfilepathhere'
 write_csv(FSL_df, file.path(path, gameFile))
 #----------------------------------------------------------------------------------------------------------------------
 #We'll do the same below for PCL_df
-PCL_df <- list.files(path = 'referencethePCLscrapedgamesfilepathfromline94here',
+PCL_df <- list.files(path = 'referencethePCLscrapedgamesfilepathhere',
                      pattern="*.csv", 
                      full.names = T) %>% 
   map_df(~read_csv(.))
